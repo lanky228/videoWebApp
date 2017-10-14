@@ -1,0 +1,7 @@
+[2017-09-17 11:23:38.854] [DEBUG] accessLog - GET /
+[2017-09-17 11:23:39.921] [DEBUG] accessLog - GET /favicon.ico
+[2017-09-17 11:23:42.026] [DEBUG] accessLog - GET /
+[2017-09-17 11:23:43.260] [DEBUG] accessLog - GET /
+[2017-09-17 11:29:38.947] [DEBUG] accessLog - GET /
+[2017-09-17 11:29:40.141] [DEBUG] accessLog - GET /favicon.ico
+[2017-09-17 11:29:54.891] [DEBUG] accessLog - GET /favicon.ico
