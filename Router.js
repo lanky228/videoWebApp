@@ -11,11 +11,9 @@ module.exports = function () {
     this.init = function () {
         //静态文件路径
         this.app.use('/public', express.static('public'));
-        this.app.use('/node_modules', express.static('node_modules'));
         //记录访问url
         log.use(this.app);
         //路由
-        // this.app.use('/', require('./module/index/index'));
         this.app.get('', function (req, res) {
             res.sendFile(__dirname + "/index.html");
         })

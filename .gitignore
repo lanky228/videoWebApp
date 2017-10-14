@@ -1,3 +1,4 @@
 /node_modules/*
-/build/*s
+/build/*
+/logs/*
 export PATH=/home/liuzhengri/软件/mongodb-linux-x86_64-amazon-3.4.9/bin:$PATH
