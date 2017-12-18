@@ -62,6 +62,7 @@ module.exports = Log4j = function (url) {
     this.init = function (data) {
         data = this.url + '\n\t' + data;
         this.yearLog.error(data);
+        console.log(data);
         return data;
     };
     //错误

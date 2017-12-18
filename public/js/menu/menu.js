@@ -7,6 +7,10 @@ Vue.component('my-menu', {
     </el-menu>
 </div>
     `,
-    data: {},
+    data: function () {
+        return {
+
+        };
+    },
     methods: {}
 });

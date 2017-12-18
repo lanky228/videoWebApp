@@ -5,8 +5,8 @@ Vue.component('my-video-view', {
     template: `
 <div>
     <el-button-group>
-      <el-button icon="plus" @click="addVideoFile"></el-button>
-      <el-button icon="delete"></el-button>
+      <el-button type="primary" icon="el-icon-edit" @click="showPanel"></el-button>
+      <el-button type="primary" icon="el-icon-delete"></el-button>
     </el-button-group>
     <el-table :data="videoFile">
         <el-table-column prop="fileId" label="ID"></el-table-column>
@@ -14,10 +14,12 @@ Vue.component('my-video-view', {
         <el-table-column prop="createrName" label="创建人"></el-table-column>
         <el-table-column prop="creationDate" label="创建时间"></el-table-column>
     </el-table>
+    <my-video-form ref="form"></my-video-form>
 </div>
     `,
     data: function () {
         return {
+            visible: true,
             videoFile: [{
                 fileId: '1',
                 fileName: 'fileName1',
@@ -32,8 +34,8 @@ Vue.component('my-video-view', {
         };
     },
     methods: {
-        addVideoFile :function(){
-            console.log('addVideoFile');
+        showPanel: function(){
+            this.$refs.form.onShow(); 
         }
     }
 });

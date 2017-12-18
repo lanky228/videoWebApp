@@ -1,7 +1,7 @@
 var mongodb = require('mongodb');
 var util = require('util');
 var config = require('../config.json');
-var Log4j = require('../../log/Log4j');
+var Log4j = require('../log/Log4j');
 var log = new Log4j(__filename);
 var DB_CONNECTION = {};
 
@@ -19,20 +19,28 @@ module.exports = function () {
         var dbConnection = DB_CONNECTION[url];
         if (dbConnection) {
             dbConnection.collection(tableName, function (err, collection) {
-                if(collection && callback){
+                if (collection && callback) {
                     callback(collection);
                 }
             });
             return;
         }
         mongodb.MongoClient.connect(url, function (err, db) {
+            if(err){
+                log.error(err);
+                return;
+            }
+            if(db == null){
+                log.error("数据库连接失败");
+                return;
+            }
             DB_CONNECTION[url] = db;
             if (!tableName) {
                 log.error('表名未定义');
                 return;
             }
             db.collection(tableName, function (err, collection) {
-                if(collection && callback){
+                if (collection && callback) {
                     callback(collection);
                 }
             });
@@ -124,9 +132,9 @@ module.exports = function () {
      * @param callback
      */
     this.update = function (tableName, condition, data, isPart, callback) {
-        var data = isPart ? {'$set': data} : data;
+        var data = isPart ? { '$set': data } : data;
         this.connection(tableName, function (collection) {
-            var filter = {'multi': true};
+            var filter = { 'multi': true };
             collection.update(condition, data, filter, function (err, result) {
                 if (err) {
                     log.error(err);
@@ -235,3 +243,19 @@ module.exports = function () {
         return true;
     }
 };
+
+//单元测试
+if (typeof require.main.exports == 'function') {
+
+    var MongoDB = require('./MongoDB');
+    var mongoDB = new MongoDB();
+    mongoDB.find('test', {}, function(result){
+        console.log(result);
+    });
+    
+
+    // mongoDB.insertMany('test', [{
+    //     id: 1,
+    //     name: 'name'
+    // }]);
+}

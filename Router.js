@@ -3,6 +3,10 @@ var config = require('./src/nodejs/config.json');
 var Log4j = require('./src/nodejs/log/Log4j');
 var Network = require('./src/nodejs/util/Network');
 var log = new Log4j();
+var session = require('express-session');
+var FileStore = require('session-file-store')(session);
+var userControler = require('./src/nodejs/module/user/UserControler');
+
 /**
  * 路由
  */
@@ -13,11 +17,44 @@ module.exports = function () {
         this.app.use('/public', express.static('public'));
         //记录访问url
         log.use(this.app);
+        //session
+        this.app.use(session({
+            name: 'skey',
+            secret: 'secret', // 用来对session id相关的cookie进行签名
+            store: new FileStore(), // 本地存储session（文本文件，也可以选择其他store，比如redis的）
+            saveUninitialized: false, // 是否自动保存未初始化的会话，建议false
+            resave: false, // 是否每次都重新保存会话，建议false
+            cookie: {
+                maxAge: 3 * 60 * 60 * 1000 // 有效期，单位是毫秒
+            }
+        }));
         //路由
+        this.app.use(function (req, res, next) {
+            if (req.session.user) {  // 判断用户是否登录
+                next();
+            } else {
+                // 解析用户请求的路径
+                var arr = req.url.split('/');
+                // 去除 GET 请求路径上携带的参数
+                for (var i = 0, length = arr.length; i < length; i++) {
+                    arr[i] = arr[i].split('?')[0];
+                }
+                // 判断请求路径是否为根、登录、注册、登出，如果是不做拦截
+                if (arr.length > 1 && arr[1] == '') {
+                    next();
+                } else if (arr.length > 2 && arr[1] == 'user' && (arr[2] == 'register' || arr[2] == 'login' || arr[2] == 'logout')) {
+                    next();
+                } else {
+                    // 登录拦截
+                    req.session.originalUrl = req.originalUrl ? req.originalUrl : null;  // 记录用户原始请求路径
+                    res.redirect('/user/login');  // 将用户重定向到登录页面
+                }
+            }
+        });
         this.app.get('', function (req, res) {
             res.sendFile(__dirname + "/index.html");
-        })
-
+        });
+        this.app.use("/user", userControler);
     };
     this.startServer = function () {
         var host = Network.getIpv4();

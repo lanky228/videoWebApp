@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>标题</title>
     <!-- 引入样式 -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-default/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
 </head>
+
 <body>
-<div id="app">
-    <my-menu></my-menu>
-    <my-video-view></my-video-view>
-</div>
-<!--网络请求-->
-<!--<script src="node_modules/_fetch@1.1.0@fetch/lib/fetch.js"></script>-->
-<!-- 引入前端库 -->
-<script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script>
-<!-- 引入组件库 -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
-<script src="public/js/menu/menu.js"></script>
-<script src="public/js/video/videoView.js"></script>
-<script>
-    // 创建根实例
-    new Vue({
-        el: '#app'
-    });
-</script>
+    <div id="app">
+        <my-menu></my-menu>
+        <my-video-view></my-video-view>
+    </div>
+    <!--网络请求-->
+    <!--<script src="node_modules/_fetch@1.1.0@fetch/lib/fetch.js"></script>-->
+    <!-- 引入组件库 -->
+    <script src="public/vue/vue.js"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="public/js/menu/menu.js"></script>
+    <script src="public/js/video/videoView.js"></script>
+    <script src="public/js/video/videoForm.js"></script>
+    <script>
+        new Vue({
+            el: '#app'
+        });
+    </script>
 </body>
+
 </html>
-
-
-
