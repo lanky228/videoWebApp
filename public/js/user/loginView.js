@@ -34,10 +34,16 @@ Vue.component('my-login-view', {
             fetch('/user/login', {
                 method: 'POST',
                 body: searchParams
-            }).then(function (response) {
-                console.log(response);
+            }).then(
+                response => response.json()
+            ).then(function (response) {
+                if(response.data){
+                    window.location.href = "/public/page/index.html";
+                } else {
+                    alert('登录失败');
+                }
             }).catch(function (err) {
-                console.log('Fetch错误:' + err);
+                alert('Fetch错误:' + err);
             });
         },
         onRegister() {

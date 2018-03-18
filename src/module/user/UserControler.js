@@ -7,7 +7,9 @@ var userService = new UserService();
 router.post('/login', function (req, res) {
     userService.login(req.body.name, req.body.password, function (result) {
         if (!!!result || result.length == 0) {
-            res.send("fail");
+            res.send({
+                data: false
+            });
             return;
         }
         var user = {
