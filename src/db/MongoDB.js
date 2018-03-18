@@ -1,7 +1,9 @@
+
+var config = require(process.cwd() + '/src/config.json');
+var Log4j = require(process.cwd() + '/src/log/Log4j');
+
 var mongodb = require('mongodb');
 var util = require('util');
-var config = require('../config.json');
-var Log4j = require('../log/Log4j');
 var log = new Log4j(__filename);
 var DB_CONNECTION = {};
 

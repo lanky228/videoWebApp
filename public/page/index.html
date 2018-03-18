@@ -6,23 +6,18 @@
     <title>标题</title>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-
 </head>
 
 <body>
     <div id="app">
-        <my-menu></my-menu>
-        <my-video-view></my-video-view>
+        <my-login-view></my-login-view>
     </div>
-    <!--网络请求-->
-    <script src="node_modules/_fetch@1.1.0@fetch/lib/fetch.js"></script>
-    <!-- 引入组件库 -->
-    <script src="public/vue/vue.js"></script>
+    <!-- 先引入 Vue -->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <!-- 引入组件库 -->
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="public/js/menu/menu.js"></script>
-    <script src="public/js/video/videoView.js"></script>
-    <script src="public/js/video/videoForm.js"></script>
+    
+    <script src="/public/js/user/loginView.js"></script>
     <script>
         new Vue({
             el: '#app'

@@ -1,7 +1,5 @@
 var Network = function () {
-
 };
-
 Network.getIpv4 = function () {
     var interfaces = require('os').networkInterfaces();
     for (var devName in interfaces) {
